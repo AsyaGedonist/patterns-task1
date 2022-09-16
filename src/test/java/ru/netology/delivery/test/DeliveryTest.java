@@ -37,23 +37,24 @@ class DeliveryTest {
 //         имени и номера телефона без создания пользователя в методе generateUser(String locale) в датагенераторе
 
         $("[data-test-id=\"city\"] input.input__control").setValue(validUser.getCity());
-        $("[placeholder=\"Дата встречи\"]").doubleClick().sendKeys(Keys.DELETE);
+        $("[placeholder=\"Дата встречи\"]").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME));
+        $("[placeholder=\"Дата встречи\"]").sendKeys(Keys.BACK_SPACE);
         $("[placeholder=\"Дата встречи\"]").setValue(firstMeetingDate);
         $("[data-test-id=\"name\"] input.input__control").setValue(validUser.getName());
         $("[data-test-id=\"phone\"] input.input__control").setValue(validUser.getPhone());
         $("[data-test-id=\"agreement\"] span.checkbox__box").click();
         $("[type=\"button\"].button").click();
 
-        $("[data-test-id=\"success-notification\"]").shouldBe(visible).shouldBe(text("Успешно!"));
         $("[data-test-id=\"success-notification\"]").shouldBe(visible)
-                .shouldBe(text("Встреча успешно запланирована на " + firstMeetingDate));
+                .shouldBe(text("Успешно!\n" + "Встреча успешно запланирована на " + firstMeetingDate));
 
-        $("[placeholder=\"Дата встречи\"]").doubleClick().sendKeys(Keys.DELETE);
+        $("[placeholder=\"Дата встречи\"]").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME));
+        $("[placeholder=\"Дата встречи\"]").sendKeys(Keys.BACK_SPACE);
         $("[placeholder=\"Дата встречи\"]").setValue(secondMeetingDate);
         $("[type=\"button\"].button").click();
 
-        $("[data-test-id=\"success-notification\"]").shouldBe(visible)
-                .shouldBe(text("\"У вас уже запланирована встреча на другую дату. Перепланировать?\""));
+        $("[data-test-id=\"replan-notification\"]").shouldBe(visible)
+                .shouldBe(text("Необходимо подтверждение"));
 
         $(".button_size_s").click();
 
