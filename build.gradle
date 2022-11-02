@@ -27,6 +27,9 @@ dependencies {
     testImplementation 'com.codeborne:selenide:5.19.0'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
     testImplementation 'io.qameta.allure:allure-selenide:2.16.1'
+    testImplementation 'com.epam.reportportal:agent-android-junit5:5.1.0'
+    testImplementation 'com.epam.reportportal:logger-java-logback:5.1.1'
+    testImplementation 'ch.qos.logback:logback-classic:1.2.10'
 }
 
 test {
